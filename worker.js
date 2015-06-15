@@ -3,8 +3,8 @@ var twilioClient = require('twilio')(
   process.env.TWILIO_AUTH_TOKEN
 );
 
-var redis = require("redis"),
-redisClient = redis.createClient();
+var redisClient = require('redis-url').connect();
+// redisClient = redis.createClient();
 var diff = require('deep-diff').diff;
 var request = require('request');
 var _ = require('lodash');

@@ -7,8 +7,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var redis = require("redis"),
-redisClient = redis.createClient();
+var redisClient = require('redis-url').connect();
+// var redisClient = redis.createClient();
 
 function checkAccess(req, res, next) {
   if (req.body.AccountSid === process.env.TWILIO_ACCOUNT_SID) {
