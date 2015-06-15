@@ -1,0 +1,69 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Super Awesome</title>
+
+    <!-- CSS (load bootstrap from a CDN) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        body { padding-top:0px; padding-bottom: 50px; }
+    </style>
+</head>
+<body class="container">
+
+    <main>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="http://<%= storeName + ".bigcartel.com" + item.url %>" class="thumbnail">
+                  <img src="<%= item.images[0].url %>" alt="...">
+                </a>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Name</span></strong></br>
+                        <%= item.name %>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Price</span></strong></br>
+                        $<%= item.price %>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Status</span></strong></br>
+                        <%= item.status %>
+                    </li>
+                    <% if (item.differences) { %>
+                    <li class="list-group-item">
+                        <strong>Diff</span></strong></br>
+                        <code><%= JSON.stringify(item.differences, null, 2) %></code>
+                    </li>
+                    <% } %>
+                    <% if (item.status != "sold-out") { %>
+                    <li class="list-group-item">
+                        <strong>Options</strong></br>
+                        <% for(var i=0; i < item.options.length; i++) { %>
+                        <code><%= JSON.stringify(item.options[i], null, 2) %></code>
+                        <% } %>
+                    </li>
+                    <% } %>
+                </ul>
+                <% if (!ignored) { %>
+                    <a href="sms:/<%= process.env.FROM_PHONE %>/&body=<%= storeName + "_" + item.id + " ignore"%>"
+                       type="button"
+                       class="btn btn-primary btn-lg btn-block">Ignore</a>
+                <% } else { %>
+                    <a href="sms:/<%= process.env.FROM_PHONE %>/&body=<%= storeName + "_" + item.id + " watch"%>"
+                       type="button"
+                       class="btn btn-primary btn-lg btn-block">Watch</a>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+
+</body>
+</html>
