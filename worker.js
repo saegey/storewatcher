@@ -76,10 +76,12 @@ function getStoreItems(storeName) {
 }
 
 setInterval(function () {
-  stores = JSON.parse(stores);
-  stores.forEach(function (store) {
-    console.log('get store – ', store);
-    getStoreItems(store);
+  redisClient.get('stores_to_watch', function (err, stores) {
+    stores = JSON.parse(stores);
+    stores.forEach(function (store) {
+      console.log('get store – ', store);
+      getStoreItems(store);
+    });
   });
 }, 100 * 60 * 60);
 
