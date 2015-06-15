@@ -106,7 +106,7 @@ app.post('/stores', checkApiKey, function (req, res) {
     if (stores === undefined || stores === null) {
       stores = [];
     } else {
-      stores = JSON.parse(items);
+      stores = JSON.parse(stores);
     }
     stores.push(req.body.name);
     redisClient.set('stores_to_watch', JSON.stringify(stores));
