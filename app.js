@@ -92,6 +92,7 @@ app.post('/sms/reply', checkAccess, function (req, res) {
       items.push(key);
     }
     redisClient.set('items_to_ignore', JSON.stringify(items));
+    res.send('okay');
   });
 });
 
